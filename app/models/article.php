@@ -56,7 +56,20 @@ class Article {
 		$this->content = $content;
 		return $this;
 	}
+
+	public function getSalary(): string {
+		return $this->salary;
+	}
 	
+	/**
+	 * @param string $salary 
+	 * @return self
+	 */
+	public function setSalary(string $content): self {
+		$this->salary = $salary;
+		return $this;
+	}
+
 	/**
 	 * @return string
 	 */
