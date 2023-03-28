@@ -32,15 +32,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/request">Your Requests</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/management" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Management
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/usermanagement">User Management</a></li>
-            <li><a class="dropdown-item" href="/jobmanagement">Job Management</a></li>
-          </ul>
-        </li>
       </ul>
     </div>
   </div>

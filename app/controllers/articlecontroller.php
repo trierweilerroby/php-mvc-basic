@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/../services/articleservice.php';
+require_once __DIR__ . '/../services/articleservice.php';
+require_once __DIR__ .'/../models/article.php';
 
 class ArticleController
 {
@@ -14,6 +15,6 @@ class ArticleController
     {
         $model = $this->articleService->getAll();
 
-        require __DIR__ . '/../views/article/index.php';
+        require_once __DIR__ . '/../views/article/job.php';
     }
 }

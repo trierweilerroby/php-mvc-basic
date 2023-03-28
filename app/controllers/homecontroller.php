@@ -4,12 +4,15 @@ class HomeController
 
     public function index()
     {
-        require __DIR__ . '/../views/home/index.php';
+        //session_start();
+        require_once __DIR__ . '/../models/user.php';
+        $user = $_SESSION['user'];
+        require_once __DIR__ . '/../views/home/index.php';
     }
 
     public function about()
     {
-        require __DIR__ . '/../views/home/about.php';
+        require_once __DIR__ . '/../views/home/about.php';
     }
 }
 ?>

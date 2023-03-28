@@ -4,8 +4,13 @@ class Article {
     private int $id;
     private string $title;
     private string $content;
-    private string $author;
-    private string $posted_at;   
+    private int $author;
+    private string $posted_at;
+	private int $salary; 
+
+	private string $author_lastname;
+	
+	private string $author_firstname;
 
 	// Getters and setters generated using https://docs.devsense.com/en/vscode/editor/code-actions
 
@@ -56,35 +61,6 @@ class Article {
 		$this->content = $content;
 		return $this;
 	}
-
-	public function getSalary(): string {
-		return $this->salary;
-	}
-	
-	/**
-	 * @param string $salary 
-	 * @return self
-	 */
-	public function setSalary(string $content): self {
-		$this->salary = $salary;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getAuthor(): string {
-		return $this->author;
-	}
-	
-	/**
-	 * @param string $author 
-	 * @return self
-	 */
-	public function setAuthor(string $author): self {
-		$this->author = $author;
-		return $this;
-	}
 	
 	/**
 	 * @return string
@@ -99,6 +75,72 @@ class Article {
 	 */
 	public function setPosted_at(string $posted_at): self {
 		$this->posted_at = $posted_at;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSalary(): int {
+		return $this->salary;
+	}
+	
+	/**
+	 * @param int $salary 
+	 * @return self
+	 */
+	public function setSalary(int $salary): self {
+		$this->salary = $salary;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAuthor(): int {
+		return $this->author;
+	}
+	
+	/**
+	 * @param int $author 
+	 * @return self
+	 */
+	public function setAuthor(int $author): self {
+		$this->author = $author;
+		return $this;
+	}
+
+
+
+	/**
+	 * @return string
+	 */
+	public function getAuthor_lastname(): string {
+		return $this->author_lastname;
+	}
+	
+	/**
+	 * @param string $author_lastname 
+	 * @return self
+	 */
+	public function setAuthor_lastname(string $author_lastname): self {
+		$this->author_lastname = $author_lastname;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAuthor_firstname(): string {
+		return $this->author_firstname;
+	}
+	
+	/**
+	 * @param string $author_firstname 
+	 * @return self
+	 */
+	public function setAuthor_firstname(string $author_firstname): self {
+		$this->author_firstname = $author_firstname;
 		return $this;
 	}
 }

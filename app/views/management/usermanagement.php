@@ -1,62 +1,57 @@
 <?php
-//session_start();
+require_once(__DIR__."/../../config/dbconfig.php");
 ?>
-<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
-<div class="topnav">
-    <a  href="databasefrom.php">Form</a>
-    <a  href="index.php">Display</a>
-    <a class="active" href="management.php">Management</a>
-</div>
-<br>
-<br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
 <?php
+require_once __DIR__ . '/../header.php';
+require_once(__DIR__."/../../repositories/userrepository.php");
+$userrepository = new UserRepository();
+$users = $userrepository->getAll();
+foreach ($users as $user){
 
+       ?>
+        <div class="article">
+            <p><i><?= $user->getFirstName() ?></i></p>
+            <p><?= $user->getLastname() ?></p>
+            <p><?= $user->getEmai() ?></p>
+            <p><?= $user->getJobsearch() ?></p>
+            <p><?= $user->getCertificate() ?></p>
 
-require_once("config.php");
+        <form method='POST' class="fl">
+            <input type='hidden' id='id' name='id' value=$id>
+            <input type='submit' id='delete' name='delete' value='Delete'>
+        </form>
+        <form method='POST' class="fl">
+            <input type='hidden' id='id' name='id' value=$name>
+            <input type='submit' id='edit' name='edit' value='Edit'>
+        </form>
 
-try{
-    $connection = new PDO("mysql:host=$servername;dbname=$databasename",$username,$password);
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connection successfull";
-}catch (PDOEXEPTION $e){
-    echo"Connnection failed: ".$e->getmessage();
-}
-$sql = "Select * FROM posts";
-$result = $connection->query($sql);
+        </div>
+       <?php
+    }
 
-foreach ($result as $row){
-    $id = (int)$row['id'];
-    $name = (int)$row['name'];
-    echo "<div class='boxgrey'>";
-        echo "<h1>";
-            echo $row['name'];
-        echo "</h1>";
-        echo "<h3>";
-            echo nl2br($row['message']);
-            echo $row['posted_at'];
-        echo "</h3>";
-        echo" <form method='POST'>";
-        echo"<input type='hidden' id='id' name='id' value=$id>";
-        echo"<input type='submit' id='delete' name='delete' value='Delete'>";
-        echo"</form>";
-        echo" <form method='POST'>";
-        echo"<input type='hidden' id='id' name='id' value=$name>";
-        echo"<input type='submit' id='edit' name='edit' value='Edit'>";
-        echo"</form>";
+   if(isset($_POST['delete'])){
+        echo"<meta http-equiv='refresh' content='0'>";
+    }else if(isset($_POST['edit'])){
 
-    echo "</div>";
-    echo "<br>";
-}
+    }
+    ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous">
+</script>
+</body>
 
-if(isset($_POST['delete'])){
-    $deletequery = "DELETE FROM posts WHERE id = :id";
+</html>
 
-    $id = htmlspecialchars($_POST['id']);
-    $deletestatement = $connection->prepare($deletequery);
-    $deletestatement->bindParam(':id',$id);
-    $deletestatement->execute();
-     echo"<meta http-equiv='refresh' content='0'>";
-}else if(isset($_POST['edit'])){
-
-}
-?>
