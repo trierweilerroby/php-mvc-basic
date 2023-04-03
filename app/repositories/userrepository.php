@@ -8,7 +8,7 @@ class UserRepository extends Repository
     function getAll()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM user");
+            $stmt = $this->connection->prepare("SELECT u.*, ut.job_type as job_name FROM user as u join jobTypes as ut on u.job_type = ut.id");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -46,28 +46,27 @@ class UserRepository extends Repository
     function editUser($user)
     {
         try {
+            $id = $user->getId();
             $firstname = $user->getFirstname();
             $lastname = $user->getLastname();
             $email = $user->getEmail();
-            $type_id = $user->getType_id();
-            $password = $user->getPassword();
 
-            $stmt = $this->connection->prepare('UPDATE `user` SET `firstname`= :firstname,`lastname`= :lastname,`email`= :email,`type_id`= :type_id,`password`= :password,`jobsearch`= :jobsearch,`certificate`= :certificate WHERE 1');
+            $stmt = $this->connection->prepare('UPDATE `user` SET `firstname`= :firstname,`lastname`= :lastname,`email`= :email,`jobsearch`= :jobsearch,`certificate`= :certificate WHERE id = :id');
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
             $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-            $stmt->bindParam(':type_id', $type_id);
-            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->execute();
 
         } catch (PDOException $e) {
-            echo "Signing up failed!!!" . $e->getMessage();
+            echo "Editing your User Details failed!!!" . $e->getMessage();
         }
 
     }
+
     function findUserByEmail($email,$password)
     {
-        $stmt = $this->connection->prepare("SELECT * FROM user WHERE email=:email");
+        $stmt = $this->connection->prepare("SELECT u.*, ut.job_type as job_name FROM user as u join jobTypes as ut on u.job_type = ut.id WHERE email=:email ");
         $stmt->BindParam(':email', $email);
 
         $stmt->execute();

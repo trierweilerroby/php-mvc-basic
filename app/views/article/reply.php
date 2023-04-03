@@ -24,61 +24,19 @@
     include_once __DIR__ . '/../header.php';
     ?>
 
-    <h1>Replys to you offer(s)</h1>
-    <br>
-    <?php
-    require_once(__DIR__ . "/../../repositories/replyrepository.php");
-    $replyrepository = new ReplyRepository();
-    $replys = $replyrepository->getAll();
-    foreach ($replys as $reply) {
-        ?>
-        <div class="card text-center" style="width: 18rem;">
-            <div class="card-header">
-                <p><i>
-                        <?= $reply->getArticle_id() ?>
-                    </i></p>
-
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">
-                    <h2>
-                        <?= $reply->getContent() ?>
-                    </h2>
-                </h5>
-                <p class="card-text"> <?= $reply->getContent() ?>
-                </p>
-            </div>
-            <ul class="list-group list-group-flush">
-    <li class="list-group-item">User name</li>
-    <li class="list-group-item">Email</li>
-    <li class="list-group-item">Certificats</li>
-  </ul>
-            <div class="card-footer text-muted">
-                <p>
-                    <?= $reply->getReply_from() ?>
-                </p>
-            </div>
-
-        <button type="submit" class="btn btn-primary" name="Accept">Accept</button>
-        <button type="submit" class="btn btn-danger" name="Decline">Decline</button>
-        </div>
-        <?php
-    }
-    ?>
-
-
 <h1>Offer Status</h1>
     <br>
     <?php
-    require_once(__DIR__ . "/../../repositories/replyrepository.php");
+    require_once(__DIR__ . "/../../repositories/replyrepository.php");//to do: change to correct mvc
     $replyrepository = new ReplyRepository();
-    $replys = $replyrepository->getAll();
+    $replys = $replyrepository->getAllPending();// until hier
     foreach ($replys as $reply) {
         ?>
-        <div class="card text-center" style="width: 18rem;">
+        <div style="float: left;">
+        <div class="card text-center" style="width: 18rem;" id="<?= $reply->getArticle_id()?>">
             <div class="card-header">
                 <p><i>
-                        <?= $reply->getArticle_id() ?>
+                        <?= $reply->getId() ?>
                     </i></p>
 
             </div>
@@ -105,6 +63,31 @@
                     <?php } ?>
                 </p>
             </div>
+            <button type="submit" class="btn btn-primary" name="Accept">Accept</button>
+        <button type="submit" class="btn btn-danger" name="Decline" onclick="removeReply()">Decline</button>
+
+        </div>
+        <script>
+            function removeReply() {
+                const card = document.getElementById("<?= $reply->getId()?>");
+                const id = card.id;
+                console.log(id);
+                card.remove();
+                var obj = {
+                    id: id
+                };
+
+                fetch('http://localhost/api/reply/decline', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                }).then(function (response) {
+                    console.log(response);
+                })
+            }
+        </script>
         </div>
         <?php
     }

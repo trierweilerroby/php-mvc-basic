@@ -15,7 +15,8 @@ class UserController
     {
         require_once __DIR__ . '/../views/user/login.php';
     }
-    public function login(){
+    public function login()
+    {
         require_once(__DIR__ . '/../models/user.php');
 
         if (isset($_POST['loginBtn'])) {
@@ -28,7 +29,8 @@ class UserController
                 'email' => $user->getEmail(),
                 'type_id' => $user->getType_id(),
                 'password' => $user->getPassword(),
-                'jobsearch' => $user->getJobsearch(),
+                'jobsearch' => $user->getJob_type(),
+                'jobname' => $user->getJob_name(),
                 'certificate' => $user->getCertificate()
             );
             header('Location: /home');
@@ -42,10 +44,17 @@ class UserController
     {
         require_once __DIR__ . '/../views/user/userinformation.php';
     }
-    public function edit(){
+    public function edit()
+    {
         require_once __DIR__ . '/../views/user/edituser.php';
     }
-    public function changePassword(){
+    public function logout()
+    {
+        session_destroy();
+        header('Location: /home');
+    }
+    public function changePassword()
+    {
         require_once __DIR__ . '/../views/user/changePassword.php';
     }
 
@@ -63,22 +72,18 @@ class UserController
             echo "<script>location.href='/login'</script>";
         }
     }
-
-    function editUser(){
-        if(isset($_POST['editBtn'])){
+    function editUser()
+    {
+        if (isset($_POST['editUserBtn'])) {
             $user = new User();
             $user->setId(htmlspecialchars($_POST['id']));
-            $user->setEmail(htmlspecialchars($_POST['email']));
             $user->setFirstName(htmlspecialchars($_POST['firstname']));
             $user->setLastName(htmlspecialchars($_POST['lastname']));
-            $user->setType_id(htmlspecialchars($_POST['type_id']));
+            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setJobsearch(htmlspecialchars($_POST['jobsearch']));
+            $user->setCertificate(htmlspecialchars($_POST['certificate']));
             $this->userService->editUser($user);
             echo "<script>location.href='/userinformation'</script>";
         }
-
-        }
     }
-
-
-
-?>
+}

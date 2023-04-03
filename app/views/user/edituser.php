@@ -15,36 +15,34 @@
     <?php
     include_once __DIR__ . '/../header.php';
     $user = $_SESSION['user'];
-    $firstname = $user['firstname'];
+    $typerepository = new UserRepository();
+$users = $userrepository->getAll();
     ?>
-    <form action="/editUser" method="POST">
+    <form action="/edit" method="POST">
         <div class="mb-3">
             <label class="form-label">Firstname</label>
-            <input class="form-control" name="firstname" value="<?php $firstname ?>">
+            <input class="form-control" name="firstname" value="<?= $user['firstname'] ?>">
         </div>
         <div class="mb-3">
             <label class="form-label">Lastname</label>
-            <input class="form-control" name="lastname">
+            <input class="form-control" name="lastname" value="<?= $user['lastname']?>">
         </div>
         <div class="mb-3">
             <label class="form-label">Email address</label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" name="email" value="<?= $user['email']?>">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Your certificates</label>
+            <input class="form-control" name="certificates" value="<?= $user['certificate']?>">
         </div>
         <div class="mb-3">
             <select class="form-select" name="type_id">
                 <option selected>--Usertype--</option>
-                <option value="2">User</option>
-                <option value="3">Employer</option>
+                <?php foreach ($usertypes as $usertype) ?>
+
             </select>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Which jobs are you looking for: </label>
-            <input class="form-control" name="jobsearch">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Your certificates</label>
-            <input class="form-control" name="certificates" rows="2">
-        </div>
+        <button typ
         <button type="submit" class="btn btn-primary" name="editUser">Submit Edit</button>
         <a href="/changePassword">Change Password</a>
     </form>

@@ -7,6 +7,21 @@ class SwitchRouter
         $uri = $this->stripParameters($uri);
 
         switch ($uri) {
+            case 'api/reply':
+                require_once __DIR__ . '/../api/reply/replycontroller.php';
+                $controller = new ReplyControllerApi();
+                $controller->getAllApi();
+                break; 
+                case 'api/reply/accept':
+                    require_once __DIR__ . '/../api/reply/replycontroller.php';
+                    $controller = new ReplyControllerApi();
+                    $controller->update();
+                    break; 
+                    case 'api/reply/decline':
+                        require_once __DIR__ . '/../api/reply/replycontroller.php';
+                        $controller = new ReplyControllerApi();
+                        $controller->delete();
+                        break;
             case '':
             case 'login':
                 require_once __DIR__ . '/../controllers/usercontroller.php';
@@ -30,6 +45,11 @@ class SwitchRouter
                 $controller = new HomeController();
                 $controller->about();
                 break;
+                case 'repondToJob':
+                require_once __DIR__ . '/../controllers/articlecontroller.php';
+                $controller = new ArticleController();
+                $controller->respondToJob();
+                    break;
 
             case 'article':
                 require_once __DIR__ . '/../controllers/articlecontroller.php';

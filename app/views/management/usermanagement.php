@@ -24,8 +24,8 @@ foreach ($users as $user){
         <div class="article">
             <p><i><?= $user->getFirstName() ?></i></p>
             <p><?= $user->getLastname() ?></p>
-            <p><?= $user->getEmai() ?></p>
-            <p><?= $user->getJobsearch() ?></p>
+            <p><?= $user->getEmail() ?></p>
+            <p><?= $user->getJob_name() ?></p>
             <p><?= $user->getCertificate() ?></p>
 
         <form method='POST' class="fl">

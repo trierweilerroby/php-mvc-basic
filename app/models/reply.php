@@ -1,12 +1,13 @@
 <?php
 class Reply {
-    private int $id;
-    private string $title;
-    private string $content;
-    private string $reply_from;
-    private string $reply_to;
-    private int $article_id; 
-	private int $accept;
+    public int $id;
+    public string $title;
+    public string $content;
+    public string $reply_from;
+    public string $reply_to;
+	public string $posted_at;
+    public int $article_id; 
+	public int $accept;
 
 	/**
 	 * @return int
@@ -117,6 +118,22 @@ class Reply {
 	 */
 	public function setAccept(int $accept): self {
 		$this->accept = $accept;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPosted_at(): string {
+		return $this->posted_at;
+	}
+	
+	/**
+	 * @param string $posted_at 
+	 * @return self
+	 */
+	public function setPosted_at(string $posted_at): self {
+		$this->posted_at = $posted_at;
 		return $this;
 	}
 }

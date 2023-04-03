@@ -7,7 +7,8 @@ class User
     private string $email;
     private int $type_id;
     private string $password;
-    private ?string $jobsearch;
+    private int $job_type;
+    private string $job_name;
     private ?string $certificate;
 
     /**
@@ -121,22 +122,6 @@ class User
 	/**
 	 * @return string
 	 */
-	public function getJobsearch(): string {
-		return $this->jobsearch;
-	}
-	
-	/**
-	 * @param string $jobsearch 
-	 * @return self
-	 */
-	public function setJobsearch(string $jobsearch): self {
-		$this->jobsearch = $jobsearch;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getCertificate(): string {
 		return $this->certificate;
 	}
@@ -147,6 +132,35 @@ class User
 	 */
 	public function setCertificate(string $certificate): self {
 		$this->certificate = $certificate;
+		return $this;
+	}
+
+	public function getJob_type(): int {
+		return $this->job_type;
+	}
+	
+	/**
+	 * @param int $job_type 
+	 * @return self
+	 */
+	public function setJob_type(int $job_type): self {
+		$this->job_type = $job_type;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getJob_name(): string {
+		return $this->job_name;
+	}
+	
+	/**
+	 * @param string $job_name 
+	 * @return self
+	 */
+	public function setJob_name(string $job_name): self {
+		$this->job_name = $job_name;
 		return $this;
 	}
 }

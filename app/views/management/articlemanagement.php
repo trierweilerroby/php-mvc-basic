@@ -21,10 +21,7 @@
 ?>
 
 <h2><?= $article->getTitle() ?></h2>
-<p><i><?= $article->getPosted_at() ?></i></p>
-<p><?= $article->getContent() ?></p>
-<p><?= $article->getSalary() ?></p>
-<p><?= $article->getAuthor() ?></p>
+
 <form method='POST'>
         <input type='hidden' id='id' name='id' value=$id>
         <input type='submit' id='delete' name='delete' value='Delete'>

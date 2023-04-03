@@ -1,16 +1,16 @@
 <?php
 class Article {
 
-    private int $id;
-    private string $title;
-    private string $content;
-    private int $author;
-    private string $posted_at;
-	private int $salary; 
+    public int $id;
+    public string $title;
+    public string $content;
+    public int $author;
+    public string $posted_at;
+	public int $salary; 
 
-	private string $author_lastname;
+	public string $author_lastname;
 	
-	private string $author_firstname;
+	public string $author_firstname;
 
 	// Getters and setters generated using https://docs.devsense.com/en/vscode/editor/code-actions
 

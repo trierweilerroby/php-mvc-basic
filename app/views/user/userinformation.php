@@ -17,7 +17,7 @@
     <h1>Personal information</h1>
     
     <?=
-        $user['firstname'] . ' ' . $user['lastname'] . ' ' . $user['email'] . ' ' . $user['jobsearch'] . ' ' . $user['certificate'];
+        $user['firstname'] . ' ' . $user['lastname'] . ' ' . $user['email'] . ' ' . $user['jobname'] . ' ' . $user['certificate'];
 
 
     ?>
