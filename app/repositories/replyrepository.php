@@ -10,9 +10,9 @@ class ReplyRepository extends Repository {
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reply');
-            $articles = $stmt->fetchAll();
+            $replys = $stmt->fetchAll();
 
-            return $articles;
+            return $replys;
 
         } catch (PDOException $e)
         {
@@ -85,9 +85,9 @@ class ReplyRepository extends Repository {
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reply');
-            $articles = $stmt->fetchAll();
+            $replys = $stmt->fetchAll();
 
-            return $articles;
+            return $replys;
 
         } catch (PDOException $e)
         {

@@ -15,9 +15,9 @@ class ReplyControllerApi
         header('Access-Control-Allow-Methods:*');
         header('Access-Control-Allow-Headers: *');
 
-        $reply = $this->repository->getAll();
+        $replys = $this->repository->getAll();
         header('Content-Type: application/json');
-        echo json_encode($reply);
+        echo json_encode($replys);
     }
 
     public function delete(){

@@ -15,9 +15,7 @@ require_once(__DIR__."/../../config/dbconfig.php");
     
 <?php
 require_once __DIR__ . '/../header.php';
-require_once(__DIR__."/../../repositories/userrepository.php");
-$userrepository = new UserRepository();
-$users = $userrepository->getAll();
+
 foreach ($users as $user){
 
        ?>

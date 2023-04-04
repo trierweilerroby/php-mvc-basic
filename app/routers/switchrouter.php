@@ -22,6 +22,11 @@ class SwitchRouter
                         $controller = new ReplyControllerApi();
                         $controller->delete();
                         break;
+            case 'api/article':
+                require_once __DIR__ . '/../api/article/articlecontroller.php';
+                $controller = new ArticleControllerApi();
+                $controller->getAll();
+                break;
             case '':
             case 'login':
                 require_once __DIR__ . '/../controllers/usercontroller.php';

@@ -26,10 +26,12 @@
 
 <h1>Offer Status</h1>
     <br>
+
+
+
+    
     <?php
-    require_once(__DIR__ . "/../../repositories/replyrepository.php");//to do: change to correct mvc
-    $replyrepository = new ReplyRepository();
-    $replys = $replyrepository->getAllPending();// until hier
+    include_once(__DIR__ . '/../../api/reply/replycontroller.php');
     foreach ($replys as $reply) {
         ?>
         <div style="float: left;">

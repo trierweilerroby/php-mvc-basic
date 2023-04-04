@@ -21,106 +21,9 @@
     <h1>Job offers!</h1>
     <br>
 
-    <div class="container">
-        <div id="jobs" class="row">
-
-        </div>
-    </div>
-
-    <script>
-        function loadData() {
-            const jobdiv = document.getElementById("jobs");
-            jobdiv.innerHTML = "";
-
-            fetch("http://localhost/api/job")
-                .then(response => response.json())
-                .then((jobs) => {
-                    jobs.forEach(job => {
-                        appendJob(job);
-                    })
-                })
-        }
-
-        function appendJob(job) {
-            const jobdiv = document.getElementById("jobs");
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add("text-center");
-            card.classList.add("col-3");
-            card.classList.add("m-2");
-
-            const header = document.createElement("div");
-            body.classList.add("card-header");
-
-            const title = document.createElement("h2");
-            title.innerText = job.title;
-            header.appendChild(title);
-            card.appendChild(header);
-
-            const body = document.createElement("div");
-            body.classList.add("card-body");
-
-            const content = document.createElement("p");
-            content.innerText = job.content;
-            body.appendChild(content);
-
-            const salary = document.createElement("p");
-            salary.innerText = job.salary;
-            body.appendChild(salary);
-            card.appendChild(body);
-
-            const footer = document.createElement("div");
-            footer.classList.add("card-footer");
-
-            const form = document.createElement("form");
-            form.action = "/repondToJob";
-            form.method = "POST";
-
-            const input = document.createElement("input");
-            input.classList.add("form-control");
-            input.name = "inputReply";
-            input.id = job.id;
-            form.appendChild(input);
-
-            const input2 = document.createElement("input");
-            input2.type = "text";
-            input2.name = "article_id";
-            input2.value = job.id;
-            input2.hidden = true;
-            form.appendChild(input2);
-
-            const input3 = document.createElement("input");
-            input3.type = "text";
-            input3.name = "author";
-            input3.value = job.author;
-            input3.hidden = true;
-            form.appendChild(input3);
-
-            const input4 = document.createElement("input");
-            input4.type = "text";
-            input4.name = "title";
-            input4.value = job.title;
-            input4.hidden = true;
-            form.appendChild(input4);
-
-            const input5 = document.createElement("input");
-            input5.type = "submit";
-            input5.name = "replyBtn";
-            input5.value = "send job";
-            input5.classList.add("btn");
-            input5.classList.add("btn-primary");
-            form.appendChild(input5);
-            footer.appendChild(form);
-            card.appendChild(footer);
-            jobdiv.appendChild(card);
-
-        }
-loadData();
-    </script>
 
 
-
-    <?php
+<?php
     foreach ($model as $article) {
         ?>
         <div class="card text-center" style="width: 18rem; float: left; margin: 5px;">
@@ -171,9 +74,12 @@ loadData();
 
             }
         </script>
+    <?php
+    }
+    ?>
+
 
         <?php
-    }
     include_once __DIR__ . '/../footer.php';
     ?>
     </div>
