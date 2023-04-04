@@ -16,6 +16,24 @@
 
 <h1>Articles!</h1>
 
+
+<form action="/jobmanagement" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input class="form-control" name="title" value="">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            <input class="form-control" name="content" value="">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Salary</label>
+            <input class="form-control" name="Salary" value="">
+        </div>
+        <button typ type="submit" class="btn btn-primary" name="addJob">Add</button>
+    </form>
+
+
 <?php
     foreach ($model as $article) {
 ?>
@@ -28,7 +46,6 @@
         </form>
         <form method='POST'>
         <input type='hidden' id='id' name='id' value=$name>
-        <input type='submit' id='edit' name='edit' value='Edit'>
 </form>
 
 

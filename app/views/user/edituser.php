@@ -42,8 +42,7 @@ $users = $userrepository->getAll();
 
             </select>
         </div>
-        <button typ
-        <button type="submit" class="btn btn-primary" name="editUser">Submit Edit</button>
+        <button typ type="submit" class="btn btn-primary" name="editUser">Submit Edit</button>
         <a href="/changePassword">Change Password</a>
     </form>
     <?php

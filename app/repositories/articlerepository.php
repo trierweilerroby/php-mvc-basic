@@ -19,6 +19,28 @@ class ArticleRepository extends Repository {
             echo $e;
         }
     }
+    function createArticle($article)
+    {
+        try {
+            $title = $article->getTitle();
+            $content = $article->getContent();
+            $author = $article->getAuthor();
+            $salary = $article->getSalary();
+
+            $stmt = $this->connection->prepare('INSERT INTO article (title, content, author, posted_at) 
+                                                    VALUES ( :title, :content, :author, now(), :salary);');
+            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+            $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+            $stmt->bindParam(':author', $author, PDO::PARAM_INT);
+            $stmt->bindParam(':salary', $salary, PDO::PARAM_INT);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo "Creating article failed!!!" . $e->getMessage();
+        }
+
+    }
+
     function deleteArticle(){
         $deletequery = "DELETE FROM article WHERE id = :id";
 

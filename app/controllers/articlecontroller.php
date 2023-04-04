@@ -18,6 +18,11 @@ class ArticleController
 
         require_once __DIR__ . '/../views/article/job.php';
     }
+    public function createArticle()
+    {
+        require_once __DIR__ . '/../views/management/articlemanagement.php';
+    }
+
 
     public function respondToJob()
     {
