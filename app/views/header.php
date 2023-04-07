@@ -41,6 +41,7 @@
             <li><a class="dropdown-item" href="/jobmanagement">Job Management</a></li>
           </ul>
         </li>
+        <li><a class="nav-link" href="/logout">Logout</a></li>
       </ul>
     </div>
   </div>

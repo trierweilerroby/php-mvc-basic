@@ -17,7 +17,6 @@ require_once(__DIR__."/../../config/dbconfig.php");
 require_once __DIR__ . '/../header.php';
 
 foreach ($users as $user){
-
        ?>
         <div class="article">
             <p><i><?= $user->getFirstName() ?></i></p>

@@ -20,5 +20,9 @@ class ReplyService {
     public function getAll() {
         return $this->repository->getAll();
     }
+    public function getByUserAndAuthor($user_id){
+        return $this->repository->getUserAndAuthor($user_id);
+    }
+
 
 }

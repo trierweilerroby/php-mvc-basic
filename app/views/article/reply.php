@@ -27,14 +27,76 @@
 <h1>Offer Status</h1>
     <br>
 
+<div class="container">
+    <div id="replys" class="row">
 
 
+    </div>
+</div>
+<script>
+    function loadData(){
+        const replyDiv = document.getElementById("reply");
+        replyDiv.innerHTML = "";
+
+        fetch('http://localhost/api/reply')
+        .then(response => response.json())
+        .then((replys)=>{
+            replys.forEach(reply => {
+            appendReply(reply);                
+            });
+        })
+    }
+
+    function appendReply(reply){
+        const replyDiv = document.getElementById("replys");
+        const replyCard = document.createElement("div");
+        replyCard.classList.add("card");
+        replyCard.classList.add("col-3");
+        replyCard.classList.add("m-2");
+        
+        const cardheader = document.createElement("div");
+        cardheader.classList.add("card-header");
+
+        const title = document.createElement("h2");
+        title.innerText = reply.title;
+        cardheader.appendChild(title);
+        card.appendChild(cardheader);
+
+        const cardbody = document.createElement("div");
+        cardbody.classList.add("card-body");
+
+        const content = document.createElement("p");
+        content.innerText = reply.content;
+        cardbody.appendChild(content);
+
+        const salary = document.createElement("p");
+        salary.innerText = reply.salary;
+        cardbody.appendChild(salary);
+
+        const cardfooter = document.createElement("div");
+        cardfooter.classList.add("card-footer");
+
+        const accepted = document.createElement("p");
+        accepted.innerText = reply.accept;
+        cardfooter.appendChild(accepted);
+
+        const acceptButton = document.createElement("button");
+        button.classList.add("acceptBtn");
+
+        const declineButton = document.createElement("button");
+        button2.classList.add("declineBtn");
+
+        loadData();
+
+
+    }
+</script>
 
     <?php
 
-require_once(__DIR__ . "/../../repositories/replyrepository.php");//to do: change to correct mvc
+/*require_once(__DIR__ . "/../../repositories/replyrepository.php");//to do: change to correct mvc
 $replyrepository = new ReplyRepository();
-$replys = $replyrepository->getAllPending();// until hier
+$replys = $replyrepository->getAllPending();// until hier*/
     foreach ($replys as $reply) {
         ?>
         <div style="float: left;">

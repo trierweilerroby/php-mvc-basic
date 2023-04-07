@@ -13,9 +13,7 @@ class ArticleController
 
     public function index()
     {
-        $model = $this->articleService->getAll();
-
-
+        $articles = $this->articleService->getAll();
         require_once __DIR__ . '/../views/article/job.php';
     }
     public function createArticle()

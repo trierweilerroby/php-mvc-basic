@@ -38,6 +38,11 @@ class SwitchRouter
                     $controller->login();
                 }
                 break;
+            case 'logout':
+                require_once __DIR__ . '/../controllers/usercontroller.php';
+                $controller = new UserController();
+                $controller->logout();
+                break;
             case 'home':
             case 'home/index':
                 //realpath($_SERVER['DOCUMENT_ROOT'])

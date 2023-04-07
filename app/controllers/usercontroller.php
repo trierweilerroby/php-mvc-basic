@@ -9,8 +9,11 @@ class UserController
     {
         $this->userService = new UserService();
     }
-
-
+    public function getAll()
+    {
+        $users = $this->userService->getAll();
+        require_once __DIR__ . '/../views/management/usermanagement.php';
+    }
     public function showLoginPage()
     {
         require_once __DIR__ . '/../views/user/login.php';
@@ -52,6 +55,7 @@ class UserController
     {
         session_destroy();
         header('Location: /home');
+        require_once(__DIR__ . '/../views/header.php');
     }
     public function changePassword()
     {

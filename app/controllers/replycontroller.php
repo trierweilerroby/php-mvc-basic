@@ -8,6 +8,11 @@ class replyController
     {
         require_once __DIR__ . '/../views/article/reply.php';
     }
+    public function getUserandAuthor()
+    {
+        $replys = $this->replyService->getUserandAuthor();
+        require_once __DIR__ . '/../views/article/reply.php';
+    }
     public function request(){
         require_once __DIR__ . '/../views/user/request.php'; 
     }

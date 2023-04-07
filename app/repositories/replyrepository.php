@@ -19,7 +19,23 @@ class ReplyRepository extends Repository {
             echo $e;
         }
     }
-    function getAcceppted(){
+    public function getUserAndAuthor($user_id){
+        try{
+            $stmt = $this->connection->prepare("SELECT reply.*, user.firstname, user.lastname, user.email, user.certificate FROM reply JOIN user ON reply.reply_from=user.id where reply_to=:reply_to AND accept = 0;");
+            $stmt->bindParam(':reply_to', $user_id, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reply');
+            $replys = $stmt->fetchAll();
+
+            return $replys;
+
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
+    public function getAcceppted(){
         try {
             $stmt = $this->connection->prepare("SELECT * FROM reply where accept='1';");
             $stmt->execute();
@@ -35,7 +51,7 @@ class ReplyRepository extends Repository {
         }
 
     }
-    function replyJob($reply) {
+    public function replyJob($reply) {
         try {
 
             $content = $reply->getContent();
@@ -56,7 +72,7 @@ class ReplyRepository extends Repository {
         }
     }
 
-    function acceptReply($reply_id) {
+    public function acceptReply($reply_id) {
         try {
             $stmt = $this->connection->prepare("UPDATE `reply` SET `accept`='1' WHERE `id`=:reply_id;");
             $stmt->bindParam(':reply_id', $reply_id, PDO::PARAM_STR);
@@ -67,7 +83,7 @@ class ReplyRepository extends Repository {
             echo $e;
         }
     }
-    function declineReply($reply_id) {
+    public function declineReply($reply_id) {
         try {
             $stmt = $this->connection->prepare("DELETE FROM `reply` WHERE `id`=:reply_id;");
             $stmt->bindParam(':reply_id', $reply_id, PDO::PARAM_STR);
@@ -79,7 +95,7 @@ class ReplyRepository extends Repository {
         }
     }
 
-    public function getAll(){
+   /* public function getAll(){
         try {
             $stmt = $this->connection->prepare("SELECT * FROM reply;");
             $stmt->execute();
@@ -93,5 +109,6 @@ class ReplyRepository extends Repository {
         {
             echo $e;
         }
-    }
+    }*/
+
 }
