@@ -28,14 +28,16 @@ class UserRepository extends Repository
             $email = $user->getEmail();
             $type_id = $user->getType_id();
             $password = $user->getPassword();
+            $job_type = $user->getJob_type();
 
-            $stmt = $this->connection->prepare('INSERT INTO user (firstname, lastname,email, type_id,password) 
-                                                    VALUES ( :firstname,:lastname, :email, :type_id, :password);');
+            $stmt = $this->connection->prepare('INSERT INTO user (firstname, lastname,email, type_id,password,job_type) 
+                                                    VALUES ( :firstname,:lastname, :email, :type_id, :password, :job_type);');
             $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
             $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->bindParam(':type_id', $type_id);
             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->bindParam(':job_type', $job_type, PDO::PARAM_INT);
             $stmt->execute();
 
         } catch (PDOException $e) {

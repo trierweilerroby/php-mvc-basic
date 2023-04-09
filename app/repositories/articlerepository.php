@@ -27,7 +27,7 @@ class ArticleRepository extends Repository {
             $author = $article->getAuthor();
             $salary = $article->getSalary();
 
-            $stmt = $this->connection->prepare('INSERT INTO article (title, content, author, posted_at) 
+            $stmt = $this->connection->prepare('INSERT INTO article (title, content, author, posted_at, salary) 
                                                     VALUES ( :title, :content, :author, now(), :salary);');
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':content', $content, PDO::PARAM_STR);

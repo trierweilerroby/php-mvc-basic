@@ -42,6 +42,14 @@
                 <option value="3">Employer</option>
             </select>
         </div>
+        <div class="mb-3">
+            <select class="form-select" name="job_type">
+                <option selected>Choose which job you are looking for</option>
+                <option value="0">Display all jobs</option>
+                <option value="1">UX/UI Designer</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary" name="signupBtn">Submit</button>
     </form>
 </body>

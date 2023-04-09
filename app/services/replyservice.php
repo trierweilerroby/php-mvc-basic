@@ -23,6 +23,12 @@ class ReplyService {
     public function getByUserAndAuthor($user_id){
         return $this->repository->getUserAndAuthor($user_id);
     }
+    public function getAccepted(){
+        return $this->repository->getAcceppted();
+    }
+    public function getYourAccepted($user_id){
+        return $this->repository->getYourAccepted($user_id);
+    }
 
 
 }

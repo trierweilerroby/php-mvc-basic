@@ -13,9 +13,14 @@
 include_once __DIR__ . '/../header.php';
 ?>
 <?php
-
+if (isset($_SESSION['user'])) {
+    ?><h1><?= $user['firstname'] ?></h1>
+<?php
+}else{
+    ?><h1>Welcome!</h1>
+<?php
+}
 ?>
-<h1><?= $user['firstname'] ?></h1>
 <?php
 include_once __DIR__ . '/../footer.php';
 ?>

@@ -34,7 +34,6 @@ class UserController
                 'password' => $user->getPassword(),
                 'jobsearch' => $user->getJob_type(),
                 'jobname' => $user->getJob_name(),
-                'certificate' => $user->getCertificate()
             );
             header('Location: /home');
         }
@@ -71,6 +70,7 @@ class UserController
             $user->setFirstName(htmlspecialchars($_POST['firstname']));
             $user->setLastName(htmlspecialchars($_POST['lastname']));
             $user->setType_id(htmlspecialchars($_POST['type_id']));
+            $user->setJob_type(htmlspecialchars($_POST['job_type']));
             $this->userService->signupUser($user);
 
             echo "<script>location.href='/login'</script>";

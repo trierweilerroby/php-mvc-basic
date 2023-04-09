@@ -12,6 +12,7 @@
 
 <?php
     include_once __DIR__ . '/../header.php';
+    $user = $_SESSION['user'];
 ?>
 
 <h1>Articles!</h1>
@@ -30,6 +31,7 @@
             <label class="form-label">Salary</label>
             <input class="form-control" name="Salary" value="">
         </div>
+        <input type="hidden" name="author" value='<?php $user['user_id'] ?>'>
         <button typ type="submit" class="btn btn-primary" name="addJob">Add</button>
     </form>
 
@@ -44,11 +46,6 @@
         <input type='hidden' id='id' name='id' value=$id>
         <input type='submit' id='delete' name='delete' value='Delete'>
         </form>
-        <form method='POST'>
-        <input type='hidden' id='id' name='id' value=$name>
-</form>
-
-
 <?php
     }
     include_once __DIR__ . '/../footer.php';

@@ -27,7 +27,6 @@ class SwitchRouter
                 $controller = new ArticleControllerApi();
                 $controller->getAll();
                 break;
-            case '':
             case 'login':
                 require_once __DIR__ . '/../controllers/usercontroller.php';
                 $controller = new UserController();
@@ -44,7 +43,7 @@ class SwitchRouter
                 $controller->logout();
                 break;
             case 'home':
-            case 'home/index':
+            case '':
                 //realpath($_SERVER['DOCUMENT_ROOT'])
                 require_once __DIR__ . '/../controllers/homecontroller.php';
                 $controller = new HomeController();
@@ -82,13 +81,13 @@ class SwitchRouter
                 $controller->manageuser();
                 break;
             case 'jobmanagement':
-                require_once __DIR__ . '/../controllers/managementcontroller.php';
-                $controller = new ManagementController();
-                $controller->managearticle();
+                require_once __DIR__ . '/../controllers/articlecontroller.php';
+                $controller = new articleController();
+                $controller->manageArticle();
                 break;
             case 'edituser':
-                require_once __DIR__ . '/../controllers/managementcontroller.php';
-                $controller = new ManagementController();
+                require_once __DIR__ . '/../controllers/usercontroller.php';
+                $controller = new UserController();
                 $controller->edituser();
                 break;
             case 'reply':

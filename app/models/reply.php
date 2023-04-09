@@ -1,13 +1,13 @@
 <?php
 class Reply {
     public int $id;
-    public string $title;
     public string $content;
     public string $reply_from;
     public string $reply_to;
 	public string $posted_at;
     public int $article_id; 
 	public int $accept;
+	public string $article_title;
 
 	/**
 	 * @return int
@@ -22,22 +22,6 @@ class Reply {
 	 */
 	public function setId(int $id): self {
 		$this->id = $id;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTitle(): string {
-		return $this->title;
-	}
-	
-	/**
-	 * @param string $title 
-	 * @return self
-	 */
-	public function setTitle(string $title): self {
-		$this->title = $title;
 		return $this;
 	}
 
@@ -72,6 +56,7 @@ class Reply {
 		$this->reply_from = $reply_from;
 		return $this;
 	}
+
 
 	/**
 	 * @return string
@@ -134,6 +119,22 @@ class Reply {
 	 */
 	public function setPosted_at(string $posted_at): self {
 		$this->posted_at = $posted_at;
+		return $this;
+	}
+
+		/**
+	 * @return string
+	 */
+	public function getArticle_title(): string {
+		return $this->article_title;
+	}
+	
+	/**
+	 * @param string $article_title 
+	 * @return self
+	 */
+	public function setArticle_title(string $article_title): self {
+		$this->article_title = $article_title;
 		return $this;
 	}
 }

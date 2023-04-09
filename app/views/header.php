@@ -24,6 +24,9 @@
           <a class="nav-link" href="/article">Jobs</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        <?php if (isset($_SESSION['user'])){ ?>
+        <li class="nav-item">
           <a class="nav-link" href="/reply">Replys</a>
         </li>
         <li class="nav-item">
@@ -32,16 +35,14 @@
         <li class="nav-item">
           <a class="nav-link" href="/request">Your Requests</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/management" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Management
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/usermanagement">User Management</a></li>
-            <li><a class="dropdown-item" href="/jobmanagement">Job Management</a></li>
-          </ul>
+        <?php if ($user['type_id'] == 1){ ?>
+        <li class="nav-item">
+          <a class="nav-link" href="/jobmanagement">Job Management</a>
         </li>
+        <li class="nav-item"><a class="nav-link" href="/usermanagement">User Management</a></li>
+        <?php  } ?>
         <li><a class="nav-link" href="/logout">Logout</a></li>
+        <?php } ?>
       </ul>
     </div>
   </div>

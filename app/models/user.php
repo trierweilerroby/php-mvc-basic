@@ -9,7 +9,6 @@ class User
     private string $password;
     private int $job_type;
     private string $job_name;
-    private ?string $certificate;
 
     /**
      * @return int
@@ -122,19 +121,6 @@ class User
 	/**
 	 * @return string
 	 */
-	public function getCertificate(): string {
-		return $this->certificate;
-	}
-	
-	/**
-	 * @param string $certificate 
-	 * @return self
-	 */
-	public function setCertificate(string $certificate): self {
-		$this->certificate = $certificate;
-		return $this;
-	}
-
 	public function getJob_type(): int {
 		return $this->job_type;
 	}

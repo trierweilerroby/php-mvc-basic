@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,8 +14,6 @@
     <?php
     include_once __DIR__ . '/../header.php';
     $user = $_SESSION['user'];
-    $typerepository = new UserRepository();
-$users = $userrepository->getAll();
     ?>
     <form action="/edit" method="POST">
         <div class="mb-3">
@@ -36,11 +33,6 @@ $users = $userrepository->getAll();
             <input class="form-control" name="certificates" value="<?= $user['certificate']?>">
         </div>
         <div class="mb-3">
-            <select class="form-select" name="type_id">
-                <option selected>--Usertype--</option>
-                <?php foreach ($usertypes as $usertype) ?>
-
-            </select>
         </div>
         <button typ type="submit" class="btn btn-primary" name="editUser">Submit Edit</button>
         <a href="/changePassword">Change Password</a>

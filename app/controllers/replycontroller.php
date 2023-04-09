@@ -16,6 +16,10 @@ class replyController
     public function request(){
         require_once __DIR__ . '/../views/user/request.php'; 
     }
+    public function getYourAccepted(){
+        $replys = $this->replyService->getYourAccepted();
+        require_once __DIR__ . '/../views/user/request.php';
+    }
 
     function replyJob()
     {

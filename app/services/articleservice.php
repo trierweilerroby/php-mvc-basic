@@ -10,4 +10,8 @@ class ArticleService {
         $repository = new ArticleRepository();
         return $repository->createArticle($article);
     }
+    public function deleteArticle($article_id){
+        $repository = new ArticleRepository();
+        return $repository->deleteArticle($article_id);
+    }
 }

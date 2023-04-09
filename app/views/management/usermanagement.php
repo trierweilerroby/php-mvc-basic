@@ -31,7 +31,6 @@ foreach ($users as $user){
         </form>
         <form method='POST' class="fl">
             <input type='hidden' id='id' name='id' value=$name>
-            <input type='submit' id='edit' name='edit' value='Edit'>
         </form>
 
         </div>

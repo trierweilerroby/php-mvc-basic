@@ -6,7 +6,9 @@ class HomeController
     {
         //session_start();
         require_once __DIR__ . '/../models/user.php';
-        $user = $_SESSION['user'];
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        }
         require_once __DIR__ . '/../views/home/index.php';
     }
 
