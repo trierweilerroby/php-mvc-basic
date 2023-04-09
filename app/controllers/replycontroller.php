@@ -13,11 +13,14 @@ class replyController
         $replys = $this->replyService->getUserandAuthor();
         require_once __DIR__ . '/../views/article/reply.php';
     }
-    public function request(){
-        require_once __DIR__ . '/../views/user/request.php'; 
+    public function request()
+    {
+        $replys = $this->replyService->request();
+        require_once __DIR__ . '/../views/user/request.php';
     }
-    public function getYourAccepted(){
-        $replys = $this->replyService->getYourAccepted();
+    public function getYourAccepted($user_id)
+    {
+        $replys = $this->replyService->getYourAccepted($user_id);
         require_once __DIR__ . '/../views/user/request.php';
     }
 
@@ -36,7 +39,8 @@ class replyController
         }
     }
 
-    function accept(){
+    function accept()
+    {
         $reply = new Reply();
         if (isset($_POST['acceptBtn'])) {
             $reply->setAccept(htmlspecialchars($_POST['accept']));
@@ -45,7 +49,8 @@ class replyController
             echo "<script>location.href='/reply'</script>";
         }
     }
-    function decline(){
+    function decline()
+    {
         $reply = new Reply();
         if (isset($_POST['declineBtn'])) {
             $reply->setAccept(htmlspecialchars($_POST['accept']));
@@ -53,6 +58,12 @@ class replyController
 
             echo "<script>location.href='/reply'</script>";
         }
+    }
+    public function getAllPending()
+    {
+        $replys = $this->replyService->getAllPending();
+        require_once __DIR__ . '/../views/article/reply.php';
+
     }
 
 

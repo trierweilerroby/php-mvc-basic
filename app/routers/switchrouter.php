@@ -11,17 +11,17 @@ class SwitchRouter
                 require_once __DIR__ . '/../api/reply/replycontroller.php';
                 $controller = new ReplyControllerApi();
                 $controller->getAllApi();
-                break; 
-                case 'api/reply/accept':
-                    require_once __DIR__ . '/../api/reply/replycontroller.php';
-                    $controller = new ReplyControllerApi();
-                    $controller->update();
-                    break; 
-                    case 'api/reply/decline':
-                        require_once __DIR__ . '/../api/reply/replycontroller.php';
-                        $controller = new ReplyControllerApi();
-                        $controller->delete();
-                        break;
+                break;
+            case 'api/reply/accept':
+                require_once __DIR__ . '/../api/reply/replycontroller.php';
+                $controller = new ReplyControllerApi();
+                $controller->update();
+                break;
+            case 'api/reply/decline':
+                require_once __DIR__ . '/../api/reply/replycontroller.php';
+                $controller = new ReplyControllerApi();
+                $controller->delete();
+                break;
             case 'api/article':
                 require_once __DIR__ . '/../api/article/articlecontroller.php';
                 $controller = new ArticleControllerApi();
@@ -54,11 +54,11 @@ class SwitchRouter
                 $controller = new HomeController();
                 $controller->about();
                 break;
-                case 'repondToJob':
+            case 'repondToJob':
                 require_once __DIR__ . '/../controllers/articlecontroller.php';
                 $controller = new ArticleController();
                 $controller->respondToJob();
-                    break;
+                break;
 
             case 'article':
                 require_once __DIR__ . '/../controllers/articlecontroller.php';
@@ -110,12 +110,12 @@ class SwitchRouter
                 $controller = new UserController();
                 $controller->changePassword();
                 break;
-                case 'request':
-                    require_once __DIR__ . '/../controllers/replycontroller.php';
-                    $controller = new ReplyController();
-                    $controller->request();
-                    break;
-    
+            case 'request':
+                require_once __DIR__ . '/../controllers/replycontroller.php';
+                $controller = new ReplyController();
+                $controller->getYourAccepted();
+                break;
+
 
 
             default:

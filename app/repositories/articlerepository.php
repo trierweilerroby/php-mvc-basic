@@ -41,7 +41,7 @@ class ArticleRepository extends Repository {
 
     }
 
-    function deleteArticle(){
+    function deleteArticle($article_id){
         $deletequery = "DELETE FROM article WHERE id = :id";
 
         $id = htmlspecialchars($_POST['id']);

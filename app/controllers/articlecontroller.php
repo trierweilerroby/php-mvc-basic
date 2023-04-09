@@ -24,6 +24,13 @@ class ArticleController
     {
         $model = $this->articleService->getAll();
         require_once __DIR__ . '/../views/management/articlemanagement.php';
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['createArticleBtn'])) {
+            $this->createArticleJob();
+        }
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteArticleBtn'])) {
+            $this->deleteArticle();
+        }
     }
 
 
@@ -53,16 +60,20 @@ class ArticleController
     }
     function createArticleJob()
     {
+       try{
         $article = new Article();
         if (isset($_POST['createArticleBtn'])) {
             $article->setTitle(htmlspecialchars($_POST['title']));
             $article->setContent(htmlspecialchars($_POST['content']));
             $article->setSalary(htmlspecialchars($_POST['salary']));
-            $article->setAuthor(htmlspecialchars($_POST['author']));
+            $article->setAuthor(htmlspecialchars((int)$_POST['author']));
             $this->articleService->createArticle($article);
 
-            echo "<script>location.href='/article'</script>";
+            echo "<script>location.href='/jobmanagement'</script>";
         }
+         }catch(Exception $e){
+              echo $e->getMessage();
+         }
     }
     public function deleteArticle()
     {

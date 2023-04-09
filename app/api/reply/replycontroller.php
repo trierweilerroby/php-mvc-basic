@@ -15,7 +15,7 @@ class ReplyControllerApi
         header('Access-Control-Allow-Methods:*');
         header('Access-Control-Allow-Headers: *');
 
-        $replys = $this->repository->getAll();
+        $replys = $this->repository->getByUserAndAuthor($_SESSION['user']['id']);
         header('Content-Type: application/json');
         echo json_encode($replys);
     }

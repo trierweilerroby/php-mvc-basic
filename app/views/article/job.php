@@ -24,6 +24,7 @@
 
 
 <?php
+$user = $_SESSION['user'];
     foreach ($articles as $article) {
         ?>
         <div class="card text-center" style="width: 18rem; float: left; margin: 5px;">

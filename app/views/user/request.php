@@ -20,9 +20,6 @@
     <h1>Here are you accepted requests</h1>
     <br>
     <?php
-    require_once(__DIR__ . "/../../repositories/replyrepository.php");//TODO: fix this
-    $replyrepository = new ReplyRepository();
-    $replys = $replyrepository->getAcceppted();
     foreach ($replys as $reply) {
         ?>
         <div class="card text-center" style="width: 18rem;">

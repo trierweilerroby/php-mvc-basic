@@ -21,7 +21,7 @@ class ReplyRepository extends Repository {
     }
     public function getUserAndAuthor($user_id){
         try{
-            $stmt = $this->connection->prepare("SELECT reply.*, user.firstname, user.lastname, user.email, user.certificate FROM reply JOIN user ON reply.reply_from=user.id where reply_to=:reply_to AND accept = 0;");
+            $stmt = $this->connection->prepare("SELECT reply.*, user.firstname, user.lastname, user.email FROM reply JOIN user ON reply.reply_from=user.id where reply_to=:reply_to AND accept = 0;");
             $stmt->bindParam(':reply_to', $user_id, PDO::PARAM_STR);
             $stmt->execute();
 

@@ -91,12 +91,9 @@
 
     }
 </script>
+<?php/*
 
-    <?php
 
-require_once(__DIR__ . "/../../repositories/replyrepository.php");//TODO: fix this path
-$replyrepository = new ReplyRepository();
-$replys = $replyrepository->getAllPending();// until hier
     foreach ($replys as $reply) {
         ?>
         <div style="float: left;">
@@ -125,7 +122,8 @@ $replys = $replyrepository->getAllPending();// until hier
             <button type="submit" class="btn btn-primary" name="Accept">Accept</button>
         <button type="submit" class="btn btn-danger" name="Decline" onclick="removeReply()">Decline</button>
 
-        </div>
+        </div>*/
+        ?>
         <script>
             function removeReply() {
                 const card = document.getElementById("<?= $reply->getId()?>");
@@ -149,7 +147,7 @@ $replys = $replyrepository->getAllPending();// until hier
         </script>
         </div>
         <?php
-    }
+    //}
     ?>
 
 
