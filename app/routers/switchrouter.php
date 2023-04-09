@@ -113,7 +113,7 @@ class SwitchRouter
             case 'request':
                 require_once __DIR__ . '/../controllers/replycontroller.php';
                 $controller = new ReplyController();
-                $controller->getYourAccepted();
+                $controller->getYourAccepted($_SESSION['user']['id']);
                 break;
 
 

@@ -17,13 +17,10 @@
     <h1>Personal information</h1>
 
     <?=
-        $user['firstname'] . ' ' . $user['lastname'] . ' ' . $user['email'] . ' ' . $user['certificate'];
+        $user['firstname'] . ' ' . $user['lastname'] . ' ' . $user['email'] ;
 
 
     ?>
-    <form action="/edituser">
-        <button type="submit" class="btn btn-primary">Edit</button>
-    </form>
 
 
     <?php

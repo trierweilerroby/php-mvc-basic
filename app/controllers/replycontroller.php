@@ -3,7 +3,7 @@ require_once __DIR__ . '/../services/replyservice.php';
 
 class replyController
 {
-    private $replyService;
+    public $replyService;
     public function reply()
     {
         require_once __DIR__ . '/../views/article/reply.php';
@@ -20,6 +20,7 @@ class replyController
     }
     public function getYourAccepted($user_id)
     {
+        $this->replyService = new ReplyService();
         $replys = $this->replyService->getYourAccepted($user_id);
         require_once __DIR__ . '/../views/user/request.php';
     }

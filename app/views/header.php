@@ -48,6 +48,4 @@
   </div>
 </nav>
 
-</body>
-</html>
  

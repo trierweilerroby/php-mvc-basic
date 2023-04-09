@@ -29,8 +29,6 @@
                         <?= $reply->getContent() ?>
                     </h2>
                 </h5>
-                <p class="card-text"> <?= $reply->getContent() ?>
-                </p>
             </div>
             <ul class="list-group list-group-flush">
   </ul>
