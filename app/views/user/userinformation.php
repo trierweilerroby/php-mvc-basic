@@ -10,9 +10,8 @@
 
 <body>
     <?php
-    require_once __DIR__ . '/../../models/user.php';
+    // require_once __DIR__ . '/../../models/user.php';
     include_once __DIR__ . '/../header.php';
-    $user = $_SESSION['user'];
     ?>
     <h1>Personal information</h1>
 
@@ -21,6 +20,9 @@
 
 
     ?>
+    <br>
+
+    <a href="/changePassword">changePassword</a>
 
 
     <?php

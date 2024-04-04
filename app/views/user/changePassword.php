@@ -14,22 +14,29 @@
 <body>
     <?php
     include_once __DIR__ . '/../header.php';
+    $user = $_SESSION['user'];
     ?>
-    <form action="/signupUser" method="POST">
-    <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control" name="password">
-            <div class="form-text">
-                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
-                special characters, or emoji.
-            </div>
+    <form action="/changePassword" method="POST">
+        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+        <div class="mb-3">
+            <label class="form-label">Firstname</label>
+            <input class="form-control" name="firstname" value="<?= $user['firstname'] ?>">
         </div>
         <div class="mb-3">
-            <label class="form-label">Password Confirm</label>
-            <input type="password" class="form-control" name="changePassword">
+            <label class="form-label">Lastname</label>
+            <input class="form-control" name="lastname" value="<?= $user['lastname']?>">
         </div>
-        <button type="submit" class="btn btn-primary" name="signupBtn">Submit Edit</button>
+        <div class="mb-3">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control" name="email" value="<?= $user['email']?>">
+        </div>
 
+        <div class="mb-3">
+        <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="*****">
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="editUserBtn">Submit Edit</button>
     </form>
     <?php
     include_once __DIR__ . '/../footer.php';

@@ -23,15 +23,15 @@
         <li class="nav-item">
           <a class="nav-link" href="/article">Jobs</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/reply">Replys</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="/userinformation">User Information</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/request">Your Requests</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

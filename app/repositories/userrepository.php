@@ -12,15 +12,15 @@ class UserRepository extends Repository
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
-            $articles = $stmt->fetchAll();
+            $users = $stmt->fetchAll();
 
-            return $articles;
+            return $users;
 
         } catch (PDOException $e) {
             echo $e;
         }
     }
-    function signupUser($user)
+     function signupUser($user)
     {
         try {
             $firstname = $user->getFirstname();
@@ -45,6 +45,7 @@ class UserRepository extends Repository
         }
 
     }
+
     function editUser($user)
     {
         try {
@@ -52,17 +53,19 @@ class UserRepository extends Repository
             $firstname = $user->getFirstname();
             $lastname = $user->getLastname();
             $email = $user->getEmail();
+            $password = $user->getPassword();
 
-            $stmt = $this->connection->prepare('UPDATE `user` SET `firstname`= :firstname,`lastname`= :lastname,`email`= :email,`jobsearch`= :jobsearch,`certificate`= :certificate WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE `user` SET `firstname`= :firstname,`lastname`= :lastname,`email`= :email, `password`= :password WHERE id = :id');
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
             $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->execute();
 
         } catch (PDOException $e) {
-            echo "Editing your User Details failed!!!" . $e->getMessage();
-        }
+            error_log("Editing user details failed: " . $e->getMessage());
+            throw new RuntimeException("Editing user details failed.", 500);        }
 
     }
 
@@ -84,6 +87,14 @@ class UserRepository extends Repository
             echo '<script>alert("incorrect pass")</script>';;
         }
 
+    }
+    function deleteUser($user_id){
+        $deletequery = "DELETE FROM user WHERE id = :id";
+
+        $id = htmlspecialchars($_POST['id']);
+        $deletestatement = $this->connection->prepare($deletequery);
+        $deletestatement->bindParam(':id',$id);
+        $deletestatement->execute();
     }
 
 

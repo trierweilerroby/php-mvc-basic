@@ -76,19 +76,14 @@ class SwitchRouter
                 $controller->signupUser();
                 break;
             case 'usermanagement':
-                require_once __DIR__ . '/../controllers/managementcontroller.php';
-                $controller = new ManagementController();
-                $controller->manageuser();
+                require_once __DIR__ . '/../controllers/usercontroller.php';
+                $controller = new UserController();
+                $controller->manageUsers();
                 break;
             case 'jobmanagement':
                 require_once __DIR__ . '/../controllers/articlecontroller.php';
                 $controller = new articleController();
                 $controller->manageArticle();
-                break;
-            case 'edituser':
-                require_once __DIR__ . '/../controllers/usercontroller.php';
-                $controller = new UserController();
-                $controller->edituser();
                 break;
             case 'reply':
                 require_once __DIR__ . '/../controllers/replycontroller.php';
@@ -99,11 +94,6 @@ class SwitchRouter
                 require_once __DIR__ . '/../controllers/usercontroller.php';
                 $controller = new UserController();
                 $controller->userinformation();
-                break;
-            case 'edit':
-                require_once __DIR__ . '/../controllers/usercontroller.php';
-                $controller = new UserController();
-                $controller->edit();
                 break;
             case 'changePassword':
                 require_once __DIR__ . '/../controllers/usercontroller.php';

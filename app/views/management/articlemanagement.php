@@ -12,7 +12,6 @@
 
 <?php
     include_once __DIR__ . '/../header.php';
-    $user = $_SESSION['user'];
 ?>
 
 <h1>Articles!</h1>

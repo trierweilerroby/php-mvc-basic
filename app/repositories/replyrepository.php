@@ -53,7 +53,7 @@ class ReplyRepository extends Repository {
     }
     public function getYourAccepted($user_id){
         try{         
-            $stmt = $this->connection->prepare("SELECT * FROM `reply` WHERE reply_from = :reply_from AND accept = 1;");
+            $stmt = $this->connection->prepare("SELECT * FROM `reply` WHERE reply_to = :reply_from AND accept = 1;");
             $stmt->bindParam(':reply_from', $user_id, PDO::PARAM_STR);
             $stmt->execute();
 

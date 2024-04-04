@@ -12,12 +12,21 @@ class UserService {
     public function signupUser($user){
         return $this->repository->signupUser($user);
     }
+    public function addUser($user){
+        return $this->repository->signupUser($user);
+    }
     public function editUser($user){
         return $this->repository->editUser($user);
     }
     public function findUserByEmail($email,$password){
         return $this->repository->findUserByEmail($email,$password);
     }
+    public function deleteUser($user_id){
+        $repository = new UserRepository();
+        return $repository->deleteUser($user_id);
+    }
+
+
 
 
 }

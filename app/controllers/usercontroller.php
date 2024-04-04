@@ -9,10 +9,19 @@ class UserController
     {
         $this->userService = new UserService();
     }
-    public function getAll()
+    public function manageUsers()
     {
         $users = $this->userService->getAll();
         require_once __DIR__ . '/../views/management/usermanagement.php';
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addUserBtn'])) {
+            $this->addUser();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteUserBtn'])) {
+            $this->delUser();
+        }
+
+
     }
     public function showLoginPage()
     {
@@ -46,10 +55,7 @@ class UserController
     {
         require_once __DIR__ . '/../views/user/userinformation.php';
     }
-    public function edit()
-    {
-        require_once __DIR__ . '/../views/user/edituser.php';
-    }
+
     public function logout()
     {
         session_destroy();
@@ -59,6 +65,9 @@ class UserController
     public function changePassword()
     {
         require_once __DIR__ . '/../views/user/changePassword.php';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editUserBtn'])) {
+            $this->editUser();
+        }
     }
 
     function signupUser()
@@ -84,10 +93,47 @@ class UserController
             $user->setFirstName(htmlspecialchars($_POST['firstname']));
             $user->setLastName(htmlspecialchars($_POST['lastname']));
             $user->setEmail(htmlspecialchars($_POST['email']));
-            $user->setJobsearch(htmlspecialchars($_POST['jobsearch']));
-            $user->setCertificate(htmlspecialchars($_POST['certificate']));
+            $user->setPassword(password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT));
             $this->userService->editUser($user);
+
+            $_SESSION['user'] = array(
+                'firstname' => $user->getFirstname(),
+                'lastname' => $user->getLastname(),
+                'email' => $user->getEmail(),
+                'password' => $user->getPassword(),
+            );
+    
             echo "<script>location.href='/userinformation'</script>";
+        }
+    }
+
+    function addUser()
+    {
+
+        $user = new User();
+        if (isset($_POST['addUserBtn'])) {
+            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setPassword(password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT));
+            $user->setFirstName(htmlspecialchars($_POST['firstname']));
+            $user->setLastName(htmlspecialchars($_POST['lastname']));
+            $user->setType_id(htmlspecialchars($_POST['type_id']));
+            $user->setJob_type(htmlspecialchars($_POST['job_type']));
+            $this->userService->addUser($user);
+            echo "<script>location.href='/usermanagement'</script>";
+
+        }
+    }
+
+    function delUser()
+    {
+
+        $user = new User();
+        if (isset($_POST['deleteUserBtn'])) {
+            $user->setId(htmlspecialchars($_POST['id']));
+            $this->userService->deleteUser($user);
+
+            echo "<script>location.href='/usermanagement'</script> <p>del</p>";
+
         }
     }
 }
