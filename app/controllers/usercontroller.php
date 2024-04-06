@@ -23,17 +23,25 @@ class UserController
 
 
     }
+    public function getUserById($id)
+    {
+        return $this->userService->getUserById($id);
+    }
     public function showLoginPage()
     {
         require_once __DIR__ . '/../views/user/login.php';
     }
-    public function login()
-    {
-        require_once(__DIR__ . '/../models/user.php');
+public function login()
+{
+    require_once(__DIR__ . '/../models/user.php');
 
-        if (isset($_POST['loginBtn'])) {
-            $user = new User();
-            $user = $this->userService->findUserByEmail(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
+    if (isset($_POST['loginBtn'])) {
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+
+        $user = $this->userService->findUserByEmail($email, $password);
+
+        if ($user !== false) {
             $_SESSION['user'] = array(
                 'id' => $user->getId(),
                 'firstname' => $user->getFirstname(),
@@ -45,8 +53,13 @@ class UserController
                 'jobname' => $user->getJob_name(),
             );
             header('Location: /home');
+            exit(); 
+        } else {
+            echo "<script>alert('Invalid email or password'); window.location.href = '/login'</script>;";
         }
     }
+}
+
     public function signup()
     {
         require_once __DIR__ . '/../views/user/signup.php';
@@ -86,26 +99,42 @@ class UserController
         }
     }
     function editUser()
-    {
-        if (isset($_POST['editUserBtn'])) {
-            $user = new User();
-            $user->setId(htmlspecialchars($_POST['id']));
-            $user->setFirstName(htmlspecialchars($_POST['firstname']));
-            $user->setLastName(htmlspecialchars($_POST['lastname']));
-            $user->setEmail(htmlspecialchars($_POST['email']));
-            $user->setPassword(password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT));
-            $this->userService->editUser($user);
+{
+    if (isset($_POST['editUserBtn'])) {
+        $user = new User();
+        $user->setId(htmlspecialchars($_POST['id']));
+        $user->setFirstName(htmlspecialchars($_POST['firstname']));
+        $user->setLastName(htmlspecialchars($_POST['lastname']));
+        $user->setEmail(htmlspecialchars($_POST['email']));
 
-            $_SESSION['user'] = array(
-                'firstname' => $user->getFirstname(),
-                'lastname' => $user->getLastname(),
-                'email' => $user->getEmail(),
-                'password' => $user->getPassword(),
-            );
-    
-            echo "<script>location.href='/userinformation'</script>";
+        // Check if the password field is not empty
+        if (!empty($_POST['password'])) {
+            // If not empty, set the new password
+            $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+            $user->setPassword($password);
+        } else {
+            // If empty, retain the old password
+            $oldUser = $this->userService->getUserById($user->getId());
+            $user->setPassword($oldUser->getPassword());
         }
+
+        // Call the userService to edit user with the modified user object
+        $this->userService->editUser($user);
+
+        // Update the user session with the modified user details
+        $_SESSION['user'] = array(
+            'firstname' => $user->getFirstname(),
+            'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPassword(), // Update password with the new/old password
+        );
+
+        // Redirect the user to logout page (you might want to change this logic)
+        echo "<script>location.href='/logout'</script>";
     }
+}
+
+        
 
     function addUser()
     {

@@ -16,6 +16,11 @@ class ArticleController
         $articles = $this->articleService->getAll();
         require_once __DIR__ . '/../views/article/job.php';
     }
+    public function userArticle()
+    {
+        $articles = $this->articleService->getUserArticle();
+        require_once __DIR__ . '/../views/article/userarticle.php';
+    }
     public function createArticle()
     {
         require_once __DIR__ . '/../views/management/articlemanagement.php';
@@ -23,9 +28,12 @@ class ArticleController
     public function manageArticle()
     {
         $model = $this->articleService->getAll();
+       // require_once __DIR__ . '/../views/management/articlemanagement.php';
+
+        $userArticle = $this->articleService->getUserArticle();
         require_once __DIR__ . '/../views/management/articlemanagement.php';
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['createArticleBtn'])) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addArticleBtn'])) {
             $this->createArticleJob();
         }
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteArticleBtn'])) {
@@ -62,14 +70,15 @@ class ArticleController
     {
        try{
         $article = new Article();
-        if (isset($_POST['createArticleBtn'])) {
+        if (isset($_POST['addArticleBtn'])) {
             $article->setTitle(htmlspecialchars($_POST['title']));
             $article->setContent(htmlspecialchars($_POST['content']));
             $article->setSalary(htmlspecialchars($_POST['salary']));
             $article->setAuthor(htmlspecialchars((int)$_POST['author']));
             $this->articleService->createArticle($article);
 
-            echo "<script>location.href='/jobmanagement'</script>";
+            echo "<script>location.href='/jobmanagement';</script>";
+
         }
          }catch(Exception $e){
               echo $e->getMessage();

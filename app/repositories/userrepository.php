@@ -20,6 +20,22 @@ class UserRepository extends Repository
             echo $e;
         }
     }
+    function getUserById($user_id){
+        try {
+            $stmt = $this->connection->prepare("SELECT password FROM user WHERE id = :id");
+            $stmt->bindParam(':id', $user_id, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $password = $stmt->fetch();
+
+            return $password;
+
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
      function signupUser($user)
     {
         try {
@@ -79,23 +95,40 @@ class UserRepository extends Repository
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
         $user = $stmt->fetch();
 
-        $bool = password_verify($password, $user->getPassword());
+        if (!$user) {
+            return false;
+        }
+        else{
+            $bool = password_verify($password, $user->getPassword());
 
-        if ($bool) {
-            return $user;
-        } else {
-            echo '<script>alert("incorrect pass")</script>';;
+            if ($bool) {
+                return $user;
+            } else {
+                $errorMsg = "This is an error message.";
+                error_log($errorMsg);
+            }
         }
 
     }
     function deleteUser($user_id){
-        $deletequery = "DELETE FROM user WHERE id = :id";
+        $id = htmlspecialchars($user_id->getId());
+    
+        $deleteArticlesQuery = "DELETE FROM article WHERE author = :id";
+        $deleteArticlesStatement = $this->connection->prepare($deleteArticlesQuery);
+        $deleteArticlesStatement->bindParam(':id', $id);
+        $deleteArticlesStatement->execute();
+    
+        $deleteRepliesQuery = "DELETE FROM reply WHERE reply_from = :id OR reply_to = :id";
+        $deleteRepliesStatement = $this->connection->prepare($deleteRepliesQuery);
+        $deleteRepliesStatement->bindParam(':id', $id);
+        $deleteRepliesStatement->execute();
 
-        $id = htmlspecialchars($_POST['id']);
-        $deletestatement = $this->connection->prepare($deletequery);
-        $deletestatement->bindParam(':id',$id);
-        $deletestatement->execute();
+        $deleteUserQuery = "DELETE FROM user WHERE id = :id";
+        $deleteUserStatement = $this->connection->prepare($deleteUserQuery);
+        $deleteUserStatement->bindParam(':id', $id);
+        $deleteUserStatement->execute();
     }
+    
 
 
 }

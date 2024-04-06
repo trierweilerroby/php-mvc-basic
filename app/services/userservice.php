@@ -9,6 +9,9 @@ class UserService {
     public function getAll() {
         return $this->repository->getAll();
     }
+    public function getUserById($user_id){
+        return $this->repository->getUserById($user_id);
+    }
     public function signupUser($user){
         return $this->repository->signupUser($user);
     }

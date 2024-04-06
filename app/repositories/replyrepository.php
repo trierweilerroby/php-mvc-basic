@@ -53,7 +53,7 @@ class ReplyRepository extends Repository {
     }
     public function getYourAccepted($user_id){
         try{         
-            $stmt = $this->connection->prepare("SELECT * FROM `reply` WHERE reply_to = :reply_from AND accept = 1;");
+            $stmt = $this->connection->prepare("SELECT * FROM `reply` WHERE reply_from = :reply_from");
             $stmt->bindParam(':reply_from', $user_id, PDO::PARAM_STR);
             $stmt->execute();
 
@@ -101,7 +101,7 @@ class ReplyRepository extends Repository {
     }
     public function declineReply($reply_id) {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM `reply` WHERE `id`=:reply_id;");
+            $stmt = $this->connection->prepare("UPDATE `reply` SET `accept`='2' WHERE `id`=:reply_id;");
             $stmt->bindParam(':reply_id', $reply_id, PDO::PARAM_STR);
             $stmt->execute();
 
@@ -110,21 +110,5 @@ class ReplyRepository extends Repository {
             echo $e;
         }
     }
-
-   /* public function getAll(){
-        try {
-            $stmt = $this->connection->prepare("SELECT * FROM reply;");
-            $stmt->execute();
-
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reply');
-            $replys = $stmt->fetchAll();
-
-            return $replys;
-
-        } catch (PDOException $e)
-        {
-            echo $e;
-        }
-    }*/
 
 }
