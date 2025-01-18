@@ -6,6 +6,10 @@ class ArticleService {
         $repository = new ArticleRepository();
         return $repository->getAll();
     }
+    public function getTypeArticle(){
+        $repository = new ArticleRepository();
+        return $repository->getTypeArticle();
+    }
     public function getUserArticle(){
         $repository = new ArticleRepository();
         return $repository->getUserArticle();

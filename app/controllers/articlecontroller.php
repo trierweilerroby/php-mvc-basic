@@ -13,7 +13,7 @@ class ArticleController
 
     public function index()
     {
-        $articles = $this->articleService->getAll();
+        $articles = $this->articleService->getTypeArticle();
         require_once __DIR__ . '/../views/article/job.php';
     }
     public function userArticle()

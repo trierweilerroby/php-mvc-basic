@@ -8,60 +8,52 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    /* Add custom styles here if needed */
-  </style>
 </head>
-<body>
-<div class="">
+<body class="bg-gray-100">
+<div>
   <?php
     include_once __DIR__ . '/../header.php';
-  if(!isset($_SESSION['user'])){
-    echo "<h1>Welcome! pls login to view the job offers</h1>";
-    
-  }else{
+  if (!isset($_SESSION['user'])) {
+    echo "<div class='container mx-auto my-20 text-center'><h1 class='text-2xl font-bold'>Welcome! Please login to view the job offers</h1></div>";
+  } else {
     $user = $_SESSION['user'];
-
-
   ?>
 
+  <!-- Job Offers Header -->
   <div class="container mx-auto my-8 text-center">
-    <h1 class="text-3xl font-bold">Job Offers</h1>
-    <p class="mt-4">Empower Your Future: Connect with Employers, Find Your Dream Job, and Thrive!</p>
-</div>
-
-  <div class="container mx-auto flex flex-wrap justify-center">
-    <?php foreach ($articles as $article): ?>
-    <div class="card text-center flex flex-col justify-between mx-2 mb-4" style="width: 18rem;">
-      <div class="card-header">
-        <h2><?= $article->getTitle() ?></h2>
-      </div>
-      <div class="card-body flex-grow">
-        <p class="card-content mb-4" style="height: 200px; overflow-y: auto;"><?= $article->getContent() ?></p>
-        <p>Salary: <?= $article->getSalary() ?>$ per year</p>
-        <hr class="mb-10 mt-10">
-        <form action="/repondToJob" method="POST" class="flex flex-col h-full">
-          <div class="mb-1">
-            <label for="inputReply">Reply to this job offer</label>
-            <input class="form-control h-10" name="inputReply" id="<?= $article->getId() ?>"></input>
-          </div>
-          <input type="hidden" name='article_id' value='<?= $article->getId() ?>'>
-          <input type="hidden" name='author' value='<?= $article->getAuthor() ?>'>
-          <input type="hidden" name='title' value='<?= $article->getTitle() ?>'>
-          <input class="btn btn-primary w-full" type="submit" name="replyBtn" value='Send Job Request'>
-        </form>
-      </div>
-      <div class="card-footer">
-        <p>Posted by <i><?= $article->getAuthor_firstname() . " " . $article->getAuthor_lastname() ?></i>
-          posted at <i><?= $article->getPosted_at() ?></i></p>
-      </div>
-    </div>
-  <?php endforeach; ?>
+    <h1 class="text-4xl font-bold text-gray-800">Job Offers</h1>
+    <p class="text-lg text-gray-600 mt-4">Empower Your Future: Connect with Employers, Find Your Dream Job, and Thrive!</p>
   </div>
 
-    <?php
-    }
-    ?>
+  <!-- Job Offers Grid -->
+  <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <?php foreach ($articles as $article): ?>
+    <div class="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
+      <div class="mb-4 text-center">
+        <h2 class="text-xl font-bold text-gray-800"><?= htmlspecialchars($article->getTitle()) ?></h2>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-4 h-24 overflow-y-auto"><?= htmlspecialchars($article->getContent()) ?></p>
+        <p class="text-blue-500 font-semibold">Salary: <?= htmlspecialchars($article->getSalary()) ?>$ per year</p>
+      </div>
+      <form action="/repondToJob" method="POST" class="space-y-4">
+        <div>
+          <label for="inputReply<?= $article->getId() ?>" class="block text-gray-700 font-medium">Reply to this job offer</label>
+          <input type="text" id="inputReply<?= $article->getId() ?>" name="inputReply" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Write your reply here..." required>
+        </div>
+        <input type="hidden" name="article_id" value="<?= htmlspecialchars($article->getId()) ?>">
+        <input type="hidden" name="author" value="<?= htmlspecialchars($article->getAuthor()) ?>">
+        <input type="hidden" name="title" value="<?= htmlspecialchars($article->getTitle()) ?>">
+        <button type="submit" name="replyBtn" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Send Job Request</button>
+      </form>
+      <div class="mt-6 text-center text-gray-500 text-sm">
+        <p>Posted by <i><?= htmlspecialchars($article->getAuthor_firstname()) . " " . htmlspecialchars($article->getAuthor_lastname()) ?></i> at <i><?= htmlspecialchars($article->getPosted_at()) ?></i></p>
+      </div>
+    </div>
+    <?php endforeach; ?>
+  </div>
+
+  <?php } ?>
 
   <?php include_once __DIR__ . '/../footer.php'; ?>
 </div>

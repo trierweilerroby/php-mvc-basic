@@ -1,3 +1,9 @@
+<?php
+// Ensure the $replys variable is defined and valid
+if (!isset($replys) || !is_array($replys)) {
+    $replys = []; // Initialize as an empty array if not already defined
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,22 +25,28 @@
 
   <div class="container mx-auto my-8">
     <h1 class="text-3xl font-bold mb-4">Here are your accepted requests</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <?php foreach ($replys as $reply): ?>
-        <div class="card text-center shadow-md rounded-md">
-          <div class="card-body">
-            <h2 class="card-title text-2xl font-bold mb-2"><?= $reply->getContent() ?></h2>
-            <?php if($reply->accept == 1): ?>
-              <p class="text-gray-500">Your reply got accepted</p>
-              <?php elseif($reply->accept == 2): ?>
-                <p class="text-gray-500">Your reply got rejected</p>
-                <?php else: ?>
-                  <p class="text-gray-500">Your reply is pending</p>
-            <?php endif; ?>
+
+    <?php if (empty($replys)): ?>
+      <!-- Display a message if there are no replies -->
+      <p class="text-gray-500">You have no accepted requests at the moment.</p>
+    <?php else: ?>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <?php foreach ($replys as $reply): ?>
+          <div class="card text-center shadow-md rounded-md">
+            <div class="card-body">
+              <h2 class="card-title text-2xl font-bold mb-2"><?= htmlspecialchars($reply->getContent()) ?></h2>
+              <?php if ($reply->accept == 1): ?>
+                <p class="text-green-500">Your reply got accepted</p>
+              <?php elseif ($reply->accept == 2): ?>
+                <p class="text-red-500">Your reply got rejected</p>
+              <?php else: ?>
+                <p class="text-yellow-500">Your reply is pending</p>
+              <?php endif; ?>
+            </div>
           </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
   </div>
 
   <?php include __DIR__ . '/../footer.php'; ?>

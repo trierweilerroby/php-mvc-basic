@@ -27,8 +27,9 @@ class ReplyService {
         return $this->repository->getAcceppted();
     }
     public function getYourAccepted($user_id){
-        return $this->repository->getYourAccepted($user_id);
-    }
+        $replies = $this->repository->getYourAccepted($user_id);
+        return $replies ?: [];
+        }
 
 
 }

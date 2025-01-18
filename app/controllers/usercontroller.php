@@ -107,29 +107,23 @@ public function login()
         $user->setLastName(htmlspecialchars($_POST['lastname']));
         $user->setEmail(htmlspecialchars($_POST['email']));
 
-        // Check if the password field is not empty
         if (!empty($_POST['password'])) {
-            // If not empty, set the new password
             $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
             $user->setPassword($password);
         } else {
-            // If empty, retain the old password
             $oldUser = $this->userService->getUserById($user->getId());
             $user->setPassword($oldUser->getPassword());
         }
 
-        // Call the userService to edit user with the modified user object
         $this->userService->editUser($user);
 
-        // Update the user session with the modified user details
         $_SESSION['user'] = array(
             'firstname' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
             'email' => $user->getEmail(),
-            'password' => $user->getPassword(), // Update password with the new/old password
+            'password' => $user->getPassword(),
         );
 
-        // Redirect the user to logout page (you might want to change this logic)
         echo "<script>location.href='/logout'</script>";
     }
 }

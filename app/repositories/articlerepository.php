@@ -20,6 +20,23 @@ class ArticleRepository extends Repository {
         }
     }
 
+    function getTypeArticle(){
+        try {
+            $stmt = $this->connection->prepare("SELECT a.*, u.firstname as author_firstname, u.lastname as author_lastname FROM article as a JOIN user as u ON a.author = u.id WHERE a.article_type = IF(:type_id = 0, a.article_type, :type_id)");
+            $stmt->bindParam(':type_id', $_SESSION['user']['jobsearch'], PDO::PARAM_STR);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Article');
+            $articles = $stmt->fetchAll();
+
+            return $articles;
+
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
+
     function getUserArticle(){
         try {
             $stmt = $this->connection->prepare("SELECT a.*, u.firstname as author_firstname, u.lastname as author_lastname FROM article as a join user as u on a.author = u.id WHERE author = :author");

@@ -13,19 +13,25 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-gray-100 text-gray-800">
 
   <?php include_once __DIR__ . '/../header.php'; ?>
 
   <div class="container mx-auto my-8">
-    <h1 class="text-3xl font-bold">Personal Information</h1>
-    <div class="card mt-4">
-      <div class="card-body">
-        <p class="card-text">Name: <?= $user['firstname'] . ' ' . $user['lastname'] ?></p>
-        <p class="card-text">Email: <?= $user['email'] ?></p>
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto">
+      <h1 class="text-4xl font-bold text-center mb-6 text-gray-800">Personal Information</h1>
+      <div class="border-b pb-4 mb-4">
+        <p class="text-lg font-medium text-gray-700">Name:</p>
+        <p class="text-gray-600"><?= htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) ?></p>
       </div>
-      <div class="card-footer">
-        <a href="/changePassword" class="btn btn-primary">Change Password</a>
+      <div class="border-b pb-4 mb-4">
+        <p class="text-lg font-medium text-gray-700">Email:</p>
+        <p class="text-gray-600"><?= htmlspecialchars($user['email']) ?></p>
+      </div>
+      <div class="text-center">
+        <a href="/changePassword" class="inline-block bg-blue-500 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition">
+          Change Password
+        </a>
       </div>
     </div>
   </div>
