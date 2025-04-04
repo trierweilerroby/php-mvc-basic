@@ -13,7 +13,9 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
     <!-- Include Header -->
-    <?php include_once __DIR__ . '/../header.php'; ?>
+    <?php include_once __DIR__ . '/../header.php';
+    echo 'PHP version: ' . phpversion();
+    ?>
 
     <!-- Hero Section -->
     <section class="relative bg-blue-900 text-white py-20">
