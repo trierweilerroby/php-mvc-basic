@@ -99,4 +99,22 @@ class ReplyController
         $replies = $this->replyService->getAllPending();
         require_once __DIR__ . '/../views/article/reply.php';
     }
+
+    public function getAllPendingJson() {
+        header('Content-Type: application/json');
+
+        try {
+            $replies = $this->replyService->getAllPending();
+            echo json_encode($replies);
+        } catch (Exception $e) {
+            echo json_encode([
+                'error' => 'Could not fetch pending replies',
+                'details' => $e->getMessage()
+            ]);
+        }
+
+        exit;
+    }
+
+
 }

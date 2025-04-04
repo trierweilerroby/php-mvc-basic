@@ -31,5 +31,10 @@ class ReplyService {
         return $replies ?: [];
         }
 
+    public function getAllPending() {
+        return $this->repository->getAllPending();
+    }
+        
+
 
 }
