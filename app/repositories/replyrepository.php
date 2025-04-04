@@ -51,22 +51,28 @@ class ReplyRepository extends Repository {
         }
 
     }
-    public function getYourAccepted($user_id){
-        try{         
+    public function getYourReply($user_id) {
+        try {
             $stmt = $this->connection->prepare("SELECT * FROM `reply` WHERE reply_from = :reply_from");
             $stmt->bindParam(':reply_from', $user_id, PDO::PARAM_STR);
             $stmt->execute();
-
+    
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reply');
             $replys = $stmt->fetchAll();
-
+    
+            if (!$replys) {
+                // Log or debug empty results
+                error_log("No replies found for user_id: $user_id");
+            }
+    
             return $replys;
-        }
-        catch(PDOException $e)
-        {
+        } catch (PDOException $e) {
+            // Log the error
+            error_log("Database error: " . $e->getMessage());
             echo $e;
         }
     }
+    
     public function replyJob($reply) {
         try {
 

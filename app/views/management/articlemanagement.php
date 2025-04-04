@@ -33,6 +33,14 @@
                     <label class="block text-lg font-medium text-gray-600 mb-2">Salary</label>
                     <input class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500" name="salary" placeholder="Enter the salary amount">
                 </div>
+                <label for="article_type" class="form-label">Article Type</label>
+                <select name="article_type" class="form-select" required>
+                    <?php foreach ($jobTypes as $jobType): ?>
+                        <option value="<?= $jobType->getId(); ?>">
+                            <?= htmlspecialchars($jobType->getJob_type()); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
                 <input type="hidden" name="author" value="<?= (int)$user['id'] ?>">
                 <button type="submit" class="w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition" name="addArticleBtn">Add Article</button>
             </form>

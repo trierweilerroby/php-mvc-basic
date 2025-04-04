@@ -12,6 +12,9 @@ class Article {
 	
 	public string $author_firstname;
 
+	public int $article_type;
+
+
 	// Getters and setters generated using https://docs.devsense.com/en/vscode/editor/code-actions
 
 	/**
@@ -143,4 +146,14 @@ class Article {
 		$this->author_firstname = $author_firstname;
 		return $this;
 	}
+
+	public function getArticleType(): int {
+		return $this->article_type;
+	}
+
+	public function setArticleType(int $article_type): self {
+		$this->article_type = $article_type;
+		return $this;
+	}
+	
 }

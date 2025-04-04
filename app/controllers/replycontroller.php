@@ -32,12 +32,19 @@ class ReplyController
         require_once __DIR__ . '/../views/user/request.php';
     }
 
-    // Get all accepted replies for a user
-    public function getYourAccepted($user_id)
-    {
-        $replies = $this->replyService->getYourAccepted($user_id);
+    public function getYourReply($user_id) {
+        $replies = $this->replyService->getYourReply($user_id);
+    
+        if (empty($replies)) {
+            error_log("No replies found for user_id: $user_id");
+        } else {
+            error_log("Fetched " . count($replies) . " replies for user_id: $user_id");
+        }
+    
         require_once __DIR__ . '/../views/user/request.php';
     }
+    
+    
 
     // Submit a reply for a job offer
     public function replyJob()

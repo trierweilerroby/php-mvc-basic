@@ -38,7 +38,7 @@
                     We connect employers with the right talent and help job seekers find their dream job. With our platform, you
                     can browse through a wide range of job offers or post your vacancies to attract top-notch candidates.
                 </p>
-                <a href="/about" class="btn btn-secondary btn-lg px-8 py-3 shadow-lg hover:shadow-xl">
+                <a href="/home/about" class="btn btn-secondary btn-lg px-8 py-3 shadow-lg hover:shadow-xl">
                     Learn More
                 </a>
             </div>

@@ -42,28 +42,28 @@
               <i class="fas fa-briefcase"></i> Job Offers
             </a>
           </li>
-          <?php if (!isset($_SESSION['user'])) { ?>
+          <?php if (!isset($_SESSION['user']) || empty($_SESSION['user']['id'])) { ?>
             <li class="nav-item">
               <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/login') ? 'active' : '' ?>" href="/login">
                 <i class="fas fa-sign-in-alt"></i> Login
               </a>
             </li>
           <?php } else { ?>
-            <?php if ($user['type_id'] == 2) { ?>
+            <?php if (isset($user['type_id']) && $user['type_id'] == 2) { ?>
               <li class="nav-item">
                 <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/reply') ? 'active' : '' ?>" href="/reply">
                   <i class="fas fa-reply"></i> Replies
                 </a>
               </li>
             <?php } ?>
-            <?php if ($user['type_id'] == 3) { ?>
+            <?php if (isset($user['type_id']) && $user['type_id'] == 3) { ?>
               <li class="nav-item">
                 <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/request') ? 'active' : '' ?>" href="/request">
                   <i class="fas fa-tasks"></i> Your Requests
                 </a>
               </li>
             <?php } ?>
-            <?php if ($user['type_id'] == 1) { ?>
+            <?php if (isset($user['type_id']) && $user['type_id'] == 1) { ?>
               <li class="nav-item">
                 <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/usermanagement') ? 'active' : '' ?>" href="/usermanagement">
                   <i class="fas fa-users-cog"></i> User Management
@@ -75,7 +75,7 @@
                 </a>
               </li>
             <?php } ?>
-            <?php if ($user['type_id'] == 1 || $user['type_id'] == 2) { ?>
+            <?php if (isset($user['type_id']) && ($user['type_id'] == 1 || $user['type_id'] == 2)) { ?>
               <li class="nav-item">
                 <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/jobmanagement') ? 'active' : '' ?>" href="/jobmanagement">
                   <i class="fas fa-cogs"></i> Job Management
@@ -85,7 +85,7 @@
           <?php } ?>
         </ul>
 
-        <?php if (isset($_SESSION['user'])) { ?>
+        <?php if (!empty($_SESSION['user']) && isset($_SESSION['user']['id'])) { ?>
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === '/userinformation') ? 'active' : '' ?>" href="/userinformation">

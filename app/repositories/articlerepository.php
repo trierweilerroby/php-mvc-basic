@@ -60,13 +60,18 @@ class ArticleRepository extends Repository {
             $content = $article->getContent();
             $author = $article->getAuthor();
             $salary = $article->getSalary();
+            $article_type = $article->getArticleType();
 
-            $stmt = $this->connection->prepare('INSERT INTO article (title, content, author, posted_at, salary) 
-                                                    VALUES ( :title, :content, :author, now(), :salary);');
+            $stmt = $this->connection->prepare('
+            INSERT INTO article (title, content, author, posted_at, salary, article_type)
+            VALUES (:title, :content, :author, now(), :salary, :article_type);
+        ');
+        
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':content', $content, PDO::PARAM_STR);
             $stmt->bindParam(':author', $author, PDO::PARAM_INT);
             $stmt->bindParam(':salary', $salary, PDO::PARAM_INT);
+            $stmt->bindParam(':article_type', $article_type, PDO::PARAM_INT);
             $stmt->execute();
 
         } catch (PDOException $e) {

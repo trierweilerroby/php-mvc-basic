@@ -71,6 +71,7 @@ public function login()
 
     public function logout()
     {
+        session_unset();
         session_destroy();
         header('Location: /home');
         require_once(__DIR__ . '/../views/header.php');
